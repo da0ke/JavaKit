@@ -1,0 +1,14 @@
+apply plugin: 'java'
+
+group = 'JavaKit'
+version = '0.0.1'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    
+}
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
