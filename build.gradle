@@ -1,14 +1,19 @@
 apply plugin: 'java'
+apply plugin: 'maven'
 
-group = 'JavaKit'
+group = 'com.github.da0ke'
 version = '0.0.1'
+
+sourceCompatibility = 1.8 // java 8
+targetCompatibility = 1.8
 
 repositories {
     jcenter()
 }
 
 dependencies {
-    
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+    implementation 'com.alibaba:fastjson:1.2.49'
 }
 
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
