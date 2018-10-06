@@ -1,4 +1,4 @@
-package utils;
+package cn.da0ke.javakit.utils;
 
 import okhttp3.OkHttpClient;
 

@@ -1,4 +1,4 @@
-package utils;
+package cn.da0ke.javakit.utils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
