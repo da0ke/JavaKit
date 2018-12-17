@@ -7,6 +7,8 @@ import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -49,7 +51,8 @@ public class NetUtils {
         }
 
         public Builder add(String key, String value) {
-            params.put(key,value);
+        	// 当null时，遍历map时会出错，所以需要将null转为空
+            params.put(key,StringUtils.trimToEmpty(value));
             return this;
         }
         public Builder add(String key, int value) {

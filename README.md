@@ -13,6 +13,6 @@ allprojects {
 Step 2. Add the dependency
 ```
 dependencies {
-	implementation 'com.github.da0ke:JavaKit:0.0.2'
+	implementation 'com.github.da0ke:JavaKit:0.0.4'
 }
 ```
