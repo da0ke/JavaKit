@@ -6,9 +6,6 @@ import java.net.FileNameMap;
 import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -36,8 +33,8 @@ public class NetUtils {
 
         private String url;
         private Map<String,String> params = new HashMap<>();
-        private String uploadFileKey;
-        private File file;
+        private Map<String,File> fileParams = new HashMap<>();
+        
 
         public Builder url(String url) {
             this.url = url;
@@ -45,8 +42,7 @@ public class NetUtils {
         }
 
         public Builder add(String key, File file) {
-            this.uploadFileKey = key;
-            this.file = file;
+        	fileParams.put(key, file);
             return this;
         }
 
@@ -88,7 +84,7 @@ public class NetUtils {
 
         public void post(final CallBack callBack) {
             RequestBody body;
-            if(file == null) {
+            if(fileParams.isEmpty()) {
                 FormBody.Builder builder = new FormBody.Builder();
                 if(!params.isEmpty()) {
                     for (Map.Entry<String, String> entry : params.entrySet()) {
@@ -98,8 +94,11 @@ public class NetUtils {
                 body = builder.build();
             } else {
                 MultipartBody.Builder builder = new MultipartBody.Builder();
-                RequestBody fileBody = RequestBody.create(MediaType.parse(getMimeType(file.getName())), file);
-                builder.addFormDataPart(uploadFileKey, file.getName(), fileBody);
+                for (Map.Entry<String, File> entry : fileParams.entrySet()) {
+                	builder.addFormDataPart(entry.getKey(), entry.getValue().getName()
+                			, RequestBody.create(MediaType.parse(getMimeType(entry.getValue().getName())), entry.getValue()));
+                }
+                
                 builder.setType(MultipartBody.FORM);
                 if(!params.isEmpty()) {
                     for (Map.Entry<String, String> entry : params.entrySet()) {
