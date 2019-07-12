@@ -1,6 +1,6 @@
 # JavaKit
 [![](https://jitpack.io/v/da0ke/JavaKit.svg)](https://jitpack.io/#da0ke/JavaKit)
-[![GitHub release](https://img.shields.io/github/release/da0ke/JavaKit.svg)](https://github.com/da0ke/JavaKit/releases)
+[![GitHub release](https://img.shields.io/github/tag/da0ke/JavaKit.svg)](https://github.com/da0ke/JavaKit/tags)
 
 封装一部分常用工具，适用于android及java开发
 
@@ -16,7 +16,7 @@ allprojects {
 ```
 
 Step 2. Add the dependency
-[![GitHub release](https://img.shields.io/github/release/da0ke/JavaKit.svg)](https://github.com/da0ke/JavaKit/releases)
+[![](https://jitpack.io/v/da0ke/JavaKit.svg)](https://jitpack.io/#da0ke/JavaKit)
 ```
 dependencies {
 	implementation 'com.github.da0ke:JavaKit:${version}'
