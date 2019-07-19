@@ -1,5 +1,6 @@
 package cn.da0ke.javakit;
 
+
 public class Test {
 
 //	public static void main(String[] args) {
@@ -8,11 +9,7 @@ public class Test {
 //	}
 //
 //	private void test() {
-//		TimeUtils.date2String(new Date(), "yyyy-MM-dd");
-//		TimeUtils.millis2String(System.currentTimeMillis(), "yyyy-MM-dd");
-//		TimeUtils.isToday(new Date());
-//		TimeUtils.getCalendarAfterDay(1);
-//		TimeUtils.getCalendarAfterMonth(1);
+//		System.out.println(StringUtils.getMatchStr("[0-9]", "http0://www.shengze.cn?ver=1&client=3"));
 //	}
 
 }

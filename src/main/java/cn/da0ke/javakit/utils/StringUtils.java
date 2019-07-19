@@ -2,6 +2,8 @@ package cn.da0ke.javakit.utils;
 
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringUtils {
 	
@@ -106,6 +108,25 @@ public class StringUtils {
             }
         }
         return buf.toString();
+    }
+    
+    /**
+	* 获取符合正则的字符串
+     * @param regex 正则表达式
+     * @param src 字符串
+     * @return 符合正则的字符串
+     */
+    public static String getMatchStr(String regex, String src) {
+    	String result = "";
+    	
+    	Pattern pattern = Pattern.compile(regex);
+    	Matcher matcher = pattern.matcher(src);
+    	
+    	while(matcher.find()) {
+    		result = matcher.group();
+    		break;
+    	}
+    	return result;
     }
 	
 }

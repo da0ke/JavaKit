@@ -11,11 +11,20 @@ import okhttp3.Callback;
 import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+/**
+ * 
+ * @author da0ke
+ *
+ */
 public class NetUtils {
+	
+	private static final OkHttpClient HTTP_CLIENT = new OkHttpClient();
+	
 	public interface CallBack {
         void onSuccess(String value);
         void onFail();
@@ -59,12 +68,26 @@ public class NetUtils {
             params.put(key,String.valueOf(value));
             return this;
         }
+        
+        public String syncGet() {
+            Request request = new Request.Builder()
+                    .url(url)
+                    .build();
+            String value = null;
+			try {
+				Response response = HTTP_CLIENT.newCall(request).execute();
+				value = response.body().string();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return value;
+        }
 
         public void get(final CallBack callBack) {
             Request request = new Request.Builder()
                     .url(url)
                     .build();
-            Singleton.INSTANCE.getHttpClient().newCall(request).enqueue(new Callback() {
+            HTTP_CLIENT.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
                     callBack.onFail();
@@ -111,7 +134,7 @@ public class NetUtils {
                     .url(url)
                     .post(body)
                     .build();
-            Singleton.INSTANCE.getHttpClient().newCall(request).enqueue(new Callback() {
+            HTTP_CLIENT.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
                     callBack.onFail();

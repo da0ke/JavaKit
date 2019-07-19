@@ -71,12 +71,15 @@ RegexUtils.isUnsignedInt("");
 
 ### StringUtils
 ```
-StringUtils.isEmpty("");
-StringUtils.isNotEmpty("");
-StringUtils.isTrimEmpty("");
-StringUtils.isNotTrimEmpty("");
-StringUtils.isAnyEmpty("", "", "");
-StringUtils.isNotEmpty("", "", "");
+StringUtils.isEmpty(CharSequence s)
+StringUtils.trimToEmpty(CharSequence s)
+StringUtils.isNotEmpty(CharSequence s)
+StringUtils.isTrimEmpty(CharSequence s)
+StringUtils.isNotTrimEmpty(CharSequence s)
+StringUtils.isAnyEmpty(final CharSequence... s)
+StringUtils.isNotEmpty(CharSequence... s)
+StringUtils.getMatchStr(String regex, String src)
+StringUtils.join(final Iterator<?> iterator, final String separator)
 ```
 
 ### TimeUtils
