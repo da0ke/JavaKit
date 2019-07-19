@@ -1,5 +1,6 @@
 package cn.da0ke.javakit;
 
+import cn.da0ke.javakit.utils.RandomUtils;
 
 public class Test {
 
@@ -9,7 +10,7 @@ public class Test {
 //	}
 //
 //	private void test() {
-//		System.out.println(StringUtils.getMatchStr("[0-9]", "http0://www.shengze.cn?ver=1&client=3"));
+//		System.out.println(RandomUtils.random(20));
 //	}
 
 }

@@ -2,7 +2,7 @@ apply plugin: 'java'
 apply plugin: 'maven'
 
 group = 'com.github.da0ke'
-version = '0.0.6'
+version = '0.0.7'
 
 sourceCompatibility = 1.8 // java 8
 targetCompatibility = 1.8
@@ -13,6 +13,7 @@ repositories {
 
 dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.0.1'
+    implementation 'org.apache.commons:commons-lang3:3.9'
 }
 
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'

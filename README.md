@@ -90,3 +90,8 @@ TimeUtils.isToday(new Date());
 TimeUtils.getCalendarAfterDay(1);
 TimeUtils.getCalendarAfterMonth(1);
 ```
+
+### RandomUtils
+```
+RandomUtils.random(20)
+```
