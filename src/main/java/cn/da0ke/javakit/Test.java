@@ -10,7 +10,9 @@ public class Test {
 //	}
 //
 //	private void test() {
-//		System.out.println(RandomUtils.random(20));
+//		for(int i=0;i<10;i++) {
+//			System.out.println(RandomUtils.nextInt(0, 19));
+//		}
 //	}
 
 }

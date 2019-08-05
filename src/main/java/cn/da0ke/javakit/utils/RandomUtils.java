@@ -1,7 +1,5 @@
 package cn.da0ke.javakit.utils;
 
-import org.apache.commons.lang3.RandomStringUtils;
-
 public class RandomUtils {
 
 	/**
@@ -14,7 +12,24 @@ public class RandomUtils {
      * @return the random string
      */
 	public static String random(final int count) {
-		return RandomStringUtils.randomAlphanumeric(10);
+		return org.apache.commons.lang3.RandomStringUtils.randomAlphanumeric(10);
 	}
 	
+	/**
+     * <p>
+     * Returns a random integer within the specified range.
+     * </p>
+     *
+     * @param startInclusive
+     *            the smallest value that can be returned, must be non-negative
+     * @param endExclusive
+     *            the upper bound (not included)
+     * @throws IllegalArgumentException
+     *             if {@code startInclusive > endExclusive} or if
+     *             {@code startInclusive} is negative
+     * @return the random integer
+     */
+	public static int nextInt(final int startInclusive, final int endExclusive) {
+		return org.apache.commons.lang3.RandomUtils.nextInt(startInclusive, endExclusive);
+	}
 }

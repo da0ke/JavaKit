@@ -93,5 +93,6 @@ TimeUtils.getCalendarAfterMonth(1);
 
 ### RandomUtils
 ```
-RandomUtils.random(20)
+RandomUtils.random(20);
+RandomUtils.nextInt(0, 20);
 ```
