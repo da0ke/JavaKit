@@ -2,10 +2,12 @@ package cn.da0ke.javakit.utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.FileNameMap;
 import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Map;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -80,6 +82,22 @@ public class NetUtils {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			return value;
+        }
+        
+        public InputStream syncGetInputStream() {
+            Request request = new Request.Builder()
+                    .url(url)
+                    .build();
+            
+            InputStream value = null;
+            try {
+				Response response = HTTP_CLIENT.newCall(request).execute();
+				value = response.body().byteStream();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
 			return value;
         }
 
