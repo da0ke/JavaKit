@@ -71,17 +71,18 @@ public class NetUtils {
             return this;
         }
         
-        public String syncGet() {
+        /**
+         * 抛出异常，方便调用方处理，比如:网络超时这种情况，调用方可以采取重试等操作
+         * @return
+         * @throws IOException
+         */
+        public String syncGet() throws IOException {
             Request request = new Request.Builder()
                     .url(url)
                     .build();
-            String value = null;
-			try {
-				Response response = HTTP_CLIENT.newCall(request).execute();
-				value = response.body().string();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+            Response response = HTTP_CLIENT.newCall(request).execute();
+            String value = response.body().string();
+			
 			return value;
         }
         
