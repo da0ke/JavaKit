@@ -13,11 +13,8 @@ public class Test {
 //	}
 //
 //	private void test() throws ParseException {
-//		Date beginDate = TimeUtils.string2date("2019-08-19 23:00", "yyyy-MM-dd HH:mm");
-//		Date endDate = new Date();
 //
-//		long days = TimeUtils.countDays(beginDate, endDate);
-//		System.out.println(days);
 //	}
+
 
 }
