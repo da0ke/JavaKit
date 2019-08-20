@@ -1,7 +1,5 @@
 package cn.da0ke.javakit;
 
-import cn.da0ke.javakit.utils.RandomUtils;
-
 public class Test {
 
 //	public static void main(String[] args) {
@@ -10,8 +8,17 @@ public class Test {
 //	}
 //
 //	private void test() {
-//		for(int i=0;i<10;i++) {
-//			System.out.println(RandomUtils.nextInt(0, 19));
+//		Date beginDate;
+//		Date endDate = new Date();
+//		try {
+//			beginDate = TimeUtils.string2date("2019-08-18", "yyyy-MM-dd");
+//			
+//			boolean rs = TimeUtils.isBetweenDays(beginDate, endDate, 1);
+//			
+//			System.out.println(rs);
+//			
+//		} catch (ParseException e) {
+//			e.printStackTrace();
 //		}
 //	}
 

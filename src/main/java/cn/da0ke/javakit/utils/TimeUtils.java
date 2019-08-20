@@ -1,12 +1,18 @@
 package cn.da0ke.javakit.utils;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
 public class TimeUtils {
+	
+	private static final long SECOND = 1000;
+	private static final long MINUTE = SECOND * 60;
+	private static final long HOUR = MINUTE * 60;
+	private static final long DAY = HOUR * 24;
 	
 	/**
 	 * Date转换为字符串
@@ -18,6 +24,18 @@ public class TimeUtils {
     	DateFormat format = new SimpleDateFormat(pattern, Locale.getDefault());
     	return format.format(date);
     }
+	
+	/**
+	 * 字符串转换为Date
+	 * @param s 日期字符串
+	 * @param pattern 字符串格式
+	 * @return Date
+	 * @throws ParseException
+	 */
+	public static Date string2date(String s, String pattern) throws ParseException {
+		DateFormat format = new SimpleDateFormat(pattern, Locale.getDefault());
+		return format.parse(s);
+	}
 	
 	/**
      * 时间戳转换成字符串格式
@@ -57,7 +75,20 @@ public class TimeUtils {
                 cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR);
 	}
    
-    
-    
+	
+	/**
+	 * 是否在n天内，以毫秒值计算
+	 * @param beginDate 开始日期
+	 * @param endDate 结束日期
+	 * @param days 相差天数
+	 * @return boolean
+	 */
+    public static boolean isBetweenDays(Date beginDate, Date endDate, int days) {
+    	long d1 = beginDate.getTime();
+    	
+    	long d2 = endDate.getTime();
+    	
+    	return (d2 - d1) / DAY <= days;
+    }
     
 }
