@@ -85,10 +85,22 @@ public class TimeUtils {
 	 */
     public static boolean isBetweenDays(Date beginDate, Date endDate, int days) {
     	long d1 = beginDate.getTime();
-    	
     	long d2 = endDate.getTime();
     	
     	return (d2 - d1) / DAY <= days;
+    }
+    
+    /**
+     * 相差天数，以毫秒值计算
+     * @param beginDate 开始日期
+     * @param endDate 结束日期
+     * @return long
+     */
+    public static long countDays(Date beginDate, Date endDate) {
+    	long d1 = beginDate.getTime();
+    	long d2 = endDate.getTime();
+    	
+    	return (d2 - d1) / DAY;
     }
     
 }

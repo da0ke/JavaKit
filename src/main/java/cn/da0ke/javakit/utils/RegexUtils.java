@@ -8,6 +8,16 @@ package cn.da0ke.javakit.utils;
 public class RegexUtils {
 	
 	/**
+	 * 验证用户名
+	 * @param password
+	 * @return
+	 */
+	public static boolean isUsername(String username) {
+		String rule = "^[a-zA-Z0-9_]{4,20}$";
+		return username.matches(rule);
+	}
+	
+	/**
 	 * 验证密码 6-20位，大小写英文字母、数字及符号组成
 	 * 
 	 * @param password
