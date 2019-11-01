@@ -1,5 +1,7 @@
 package cn.da0ke.javakit.utils;
 
+import java.math.BigDecimal;
+
 public class NumberUtils {
 	
 	/**
@@ -58,4 +60,13 @@ public class NumberUtils {
 		return string2int(str, 0);
 	}
 	
+	/**
+	 * 去除多余的0
+	 * @param number
+	 * @return
+	 */
+	public static String getTrimNumber(double number) {  
+	    return BigDecimal.valueOf(number)
+	            .stripTrailingZeros().toPlainString();  
+	} 
 }

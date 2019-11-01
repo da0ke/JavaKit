@@ -9,7 +9,7 @@ public class FormatUtils {
 	 * @return
 	 */
 	public static String secretMobile(String mobile) {
-		if (cn.da0ke.javakit.utils.RegexUtils.isMobile(mobile)) {
+		if (RegexUtils.isMobile(mobile)) {
 			return mobile.substring(0, 3) + "****" + mobile.substring(7);
 		} else {
 			return mobile.substring(0, 3) + "****" + (mobile.length() < 8 ? "****" : mobile.substring(7));
@@ -44,7 +44,7 @@ public class FormatUtils {
 	}
 	
 	public static String formatMobile(String mobile) {
-		if (cn.da0ke.javakit.utils.RegexUtils.isMobile(mobile)) {
+		if (RegexUtils.isMobile(mobile)) {
 			return mobile.substring(0, 3) + " " + mobile.substring(3,7) + " " + mobile.substring(7);
 		} else {
 			return mobile;
