@@ -2,13 +2,14 @@ apply plugin: 'java'
 apply plugin: 'maven'
 
 group = 'com.github.da0ke'
-version = '0.0.17'
+version = '0.0.18'
 
 sourceCompatibility = 1.8 // java 8
 targetCompatibility = 1.8
 
 repositories {
     jcenter()
+    maven { url 'https://www.jitpack.io' }
 }
 
 dependencies {
@@ -21,6 +22,9 @@ dependencies {
     
     implementation 'com.google.zxing:core:3.3.3'
 	implementation 'com.google.zxing:javase:3.3.3'
+	
+	implementation 'com.github.promeg:tinypinyin:2.0.3'
+	implementation 'com.github.promeg:tinypinyin-lexicons-java-cncity:2.0.3'
 }
 
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
