@@ -4,14 +4,24 @@ import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
-
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 public class EncryptUtils {
+	
+	/**
+	 * md5
+	 * @param text 明文
+	 * @return 密文
+	 */
+	public static String md5(String text) {
+		return DigestUtils.md5Hex(text).toUpperCase();
+	}
 
     public static String encryptAes(String text, String key) {
         if (StringUtils.isEmpty(key) || StringUtils.isEmpty(text)

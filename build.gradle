@@ -2,7 +2,7 @@ apply plugin: 'java'
 apply plugin: 'maven'
 
 group = 'com.github.da0ke'
-version = '0.0.18'
+version = '0.0.19'
 
 sourceCompatibility = 1.8 // java 8
 targetCompatibility = 1.8
@@ -15,6 +15,7 @@ repositories {
 dependencies {
     implementation 'org.apache.commons:commons-lang3:3.9'
 	implementation 'commons-io:commons-io:2.6'
+	implementation 'apache-codec:commons-codec:1.2'
 	implementation 'org.apache.tika:tika-core:1.17'
 	
     implementation 'com.squareup.okhttp3:okhttp:4.0.1'
