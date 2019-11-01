@@ -34,7 +34,7 @@ public class RegexUtils {
 	 */
 	public static boolean isMobile(String mobile) {
 		String rule = "^1[0-9]{10}$";
-		return mobile.matches(rule);
+		return mobile!=null && mobile.matches(rule);
 	}
 
 	/**
