@@ -30,9 +30,10 @@ public class RegexUtils {
 
 	/**
 	 * 验证手机号码格式
+	 * 当号码段增加时，运营商并不会通知我，所以就干脆放宽了限制
 	 */
 	public static boolean isMobile(String mobile) {
-		String rule = "^1[3456789][0-9]{9}$";
+		String rule = "^1[0-9]{10}$";
 		return mobile.matches(rule);
 	}
 
