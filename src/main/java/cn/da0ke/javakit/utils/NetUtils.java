@@ -29,6 +29,14 @@ public class NetUtils {
 	
 	public interface CallBack {
         void onSuccess(String value);
+        
+        
+        /**
+    	 * android app中，如果加载未结束的时候按返回键，程序将执行onFail()，
+    	 * 此时，如果在onFail()中有使用getActivity()，则获取到的activity为null，产生空指针异常
+    	 * 为了解决这个问题，主动捕获空指针，防止程序崩溃
+    	 * 注意：捕获已在封装接口中实现，用户无需try catch
+    	 */
         void onFail();
     }
 
@@ -109,7 +117,16 @@ public class NetUtils {
             HTTP_CLIENT.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
-                    callBack.onFail();
+                    try {
+                    	/**
+                    	 * android app中，如果加载未结束的时候按返回键，程序将执行onFail()，
+                    	 * 此时，如果在onFail()中有使用getActivity()，则获取到的activity为null，产生空指针异常
+                    	 * 为了解决这个问题，主动捕获空指针，防止程序崩溃
+                    	 */
+						callBack.onFail();
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
                 }
 
                 @Override
@@ -117,8 +134,17 @@ public class NetUtils {
                     try {
                         String value = response.body().string();
                         callBack.onSuccess(value);
-                    } catch(Exception e) {
-                        callBack.onFail();
+                    } catch(IOException e) {
+                        try {
+                        	/**
+                        	 * android app中，如果加载未结束的时候按返回键，程序将执行onFail()，
+                        	 * 此时，如果在onFail()中有使用getActivity()，则获取到的activity为null，产生空指针异常
+                        	 * 为了解决这个问题，主动捕获空指针，防止程序崩溃
+                        	 */
+							callBack.onFail();
+						} catch (Exception e1) {
+							e1.printStackTrace();
+						}
                     }
                 }
             });
@@ -156,7 +182,16 @@ public class NetUtils {
             HTTP_CLIENT.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
-                    callBack.onFail();
+                    try {
+                    	/**
+                    	 * android app中，如果加载未结束的时候按返回键，程序将执行onFail()，
+                    	 * 此时，如果在onFail()中有使用getActivity()，则获取到的activity为null，产生空指针异常
+                    	 * 为了解决这个问题，主动捕获空指针，防止程序崩溃
+                    	 */
+						callBack.onFail();
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
                 }
 
                 @Override
@@ -165,7 +200,16 @@ public class NetUtils {
                         String value = response.body().string();
                         callBack.onSuccess(value);
                     } catch(Exception e) {
-                        callBack.onFail();
+                        try {
+                        	/**
+                        	 * android app中，如果加载未结束的时候按返回键，程序将执行onFail()，
+                        	 * 此时，如果在onFail()中有使用getActivity()，则获取到的activity为null，产生空指针异常
+                        	 * 为了解决这个问题，主动捕获空指针，防止程序崩溃
+                        	 */
+							callBack.onFail();
+						} catch (Exception e1) {
+							e1.printStackTrace();
+						}
                     }
                 }
             });
