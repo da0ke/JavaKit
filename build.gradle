@@ -2,7 +2,7 @@ apply plugin: 'java'
 apply plugin: 'maven'
 
 group = 'com.github.da0ke'
-version = '0.0.23'
+version = '0.0.24'
 
 sourceCompatibility = 1.8 // java 8
 targetCompatibility = 1.8
