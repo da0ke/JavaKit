@@ -12,7 +12,7 @@ public class RandomUtils {
      * @return the random string
      */
 	public static String random(final int count) {
-		return org.apache.commons.lang3.RandomStringUtils.randomAlphanumeric(10);
+		return org.apache.commons.lang3.RandomStringUtils.randomAlphanumeric(count);
 	}
 	
 	/**
