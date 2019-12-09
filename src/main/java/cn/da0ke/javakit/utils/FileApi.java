@@ -245,7 +245,7 @@ private FileApi(){}
 					newFileName = destFilename;
 				}
 				
-				String folderName = getFolderNameByMonth();
+				String folderName = generateFolderNameByMonth();
 				String outFilepath = root+folderName+File.separator+newFileName;
 				
 				if(!new File(root+folderName).exists()) {
@@ -272,7 +272,7 @@ private FileApi(){}
 				}
 			} else if(StringUtils.isNotEmpty(url)) {
 				newFileName = generateFileName();
-				String folderName = getFolderNameByMonth();
+				String folderName = generateFolderNameByMonth();
 				String outFilepath = root+folderName+File.separator+newFileName;
 				
 				if(!new File(root+folderName).exists()) {
@@ -306,7 +306,81 @@ private FileApi(){}
 			return result;
 		}
 		
-		
+		/**
+		 * 2019-12-09/xxxxx.jpg
+		 * @return
+		 */
+		public String create3() {
+			String result = null;
+			
+			String newFileName;
+			if(file != null) {
+				if(destFilename == null) {
+					newFileName = generateFileName(fileName);
+				} else {
+					newFileName = destFilename;
+				}
+				
+				String folderName = generateFolderNameByDate();
+				String outFilepath = root+folderName+File.separator+newFileName;
+				
+				if(!new File(root+folderName).exists()) {
+					new File(root+folderName).mkdirs();
+				}
+				
+				try {
+					if(hasSmall) {
+						String smallPath = root+folderName+File.separator+"s_"+newFileName;
+						Thumbnails.of(file).size(smallWidth, smallHeight).toFile(smallPath);
+					}
+
+					if(watermark != null) { //加水印，则必须进行压缩
+						Thumbnails.of(file).size(bigWidth, bigHeight).watermark(watermark,opacity).toFile(outFilepath);
+					} else if(compress) { //压缩
+						Thumbnails.of(file).size(bigWidth, bigHeight).toFile(outFilepath);
+					} else {
+						FileUtils.copyFile(file, new File(outFilepath));
+					}
+					
+					result = folderName + "/" + newFileName;
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			} else if(StringUtils.isNotEmpty(url)) {
+				newFileName = generateFileName();
+				String folderName = generateFolderNameByDate();
+				String outFilepath = root+folderName+File.separator+newFileName;
+				
+				if(!new File(root+folderName).exists()) {
+					new File(root+folderName).mkdirs();
+				}
+				
+				try {
+					InputStream inStream = NetUtils.builder().url(url).syncGetInputStream();
+					
+					if(hasSmall) {
+						String smallDes = root+folderName+File.separator+"s_"+newFileName;
+						Thumbnails.of(inStream).size(smallWidth, smallHeight).toFile(smallDes);
+					}
+					
+					/**
+					 * url下载图片，必须压缩
+					 */
+					if(watermark != null) { //加水印
+						Thumbnails.of(inStream).size(bigWidth, bigHeight).watermark(watermark,opacity).toFile(new File(outFilepath));
+					} else {
+						Thumbnails.of(inStream).size(bigWidth, bigHeight).toFile(new File(outFilepath));
+					}
+					
+					result = folderName + "/" + newFileName;
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+			}
+
+			return result;
+		}
 		
 		/**
 		 * 依据原始文件名后缀,生成新文件名
@@ -317,11 +391,11 @@ private FileApi(){}
 		private String generateFileName(String fileName) {
 			//文件扩展名
 			String ext = fileName.substring(fileName.lastIndexOf(".")).toLowerCase();
-			return RandomUtils.nextInt(0, 10000) + System.currentTimeMillis() + ext;
+			return RandomUtils.nextInt(0, 10000) + "" + System.currentTimeMillis() + ext;
 		}
 		
 		private String generateFileName() {
-			return RandomUtils.nextInt(0, 10000) + System.currentTimeMillis() + ".jpg";
+			return RandomUtils.nextInt(0, 10000) + "" + System.currentTimeMillis() + ".jpg";
 		}
 		
 		/**
@@ -330,8 +404,14 @@ private FileApi(){}
 		 * @param path
 		 * @return
 		 */
-		private String getFolderNameByMonth() {
+		private String generateFolderNameByMonth() {
 			SimpleDateFormat formater = new SimpleDateFormat("yyyyMM");
+			return formater.format(new Date());
+		}
+		
+		
+		private String generateFolderNameByDate() {
+			SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
 			return formater.format(new Date());
 		}
 		
@@ -358,4 +438,5 @@ private FileApi(){}
         }
         return result;
     }
+	
 }
