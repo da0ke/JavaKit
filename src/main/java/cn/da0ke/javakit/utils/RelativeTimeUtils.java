@@ -19,6 +19,50 @@ public class RelativeTimeUtils {
     private static final String ONE_HOUR_AGO = "小时前";
     private static final String ONE_DAY_AGO = "天前";
     
+    private static final int template_def = 0;
+    private static final int template_1 = 1;
+    
+    private static String format(int template, Date startDate, Date endDate) {
+    	if (template == template_1) {
+    		long start = startDate.getTime();
+        	long end = endDate.getTime();
+        	
+            long delta = end - start;
+            
+            // x分钟前
+            if (delta < 60L * ONE_MINUTE) {
+                long minutes = toMinutes(delta);
+                return (minutes <= 0 ? 1 : minutes) + ONE_MINUTE_AGO;
+            }
+            
+            // x小时前
+            if (delta < 24L * ONE_HOUR) {
+                long hours = toHours(delta);
+                return (hours <= 0 ? 1 : hours) + ONE_HOUR_AGO;
+            }
+            
+            // 时分秒清零
+            end = getMillisAfterClear(end, Calendar.MILLISECOND, Calendar.SECOND, Calendar.MINUTE, Calendar.HOUR_OF_DAY);
+            start = getMillisAfterClear(start, Calendar.MILLISECOND, Calendar.SECOND, Calendar.MINUTE, Calendar.HOUR_OF_DAY);
+            delta = end - start;
+            
+            // 昨天
+            if (delta < 2L * ONE_DAY) {
+                return "昨天";
+            }
+            
+            // 前天
+            if (delta < 3L * ONE_DAY) {
+            	return "前天";
+            }
+
+            return TimeUtils.date2String(startDate, "MM-dd");
+    	} else {
+    		return format(startDate, endDate);
+    	}
+    }
+    
+    
     private static String format(Date startDate, Date endDate) {
     	long start = startDate.getTime();
     	long end = endDate.getTime();
@@ -68,10 +112,12 @@ public class RelativeTimeUtils {
         return TimeUtils.date2String(startDate, "yyyy-MM-dd");
     }
     
-    
+    public static String format(int template, Date date) {
+    	return format(template, date, new Date());
+    }
  
     public static String format(Date date) {
-    	return format(date, new Date());
+    	return format(RelativeTimeUtils.template_def, date, new Date());
     }
  
     private static long toSeconds(long date) {
