@@ -47,9 +47,15 @@ public class NetUtils {
 		private String url;
 		private Map<String, String> params = new HashMap<>();
 		private Map<String, File> fileParams = new HashMap<>();
+		private Map<String, String> headers = new HashMap<>();
 
 		public Builder url(String url) {
 			this.url = url;
+			return this;
+		}
+		
+		public Builder addHeader(String key, String value) {
+			headers.put(key, value);
 			return this;
 		}
 
@@ -107,7 +113,14 @@ public class NetUtils {
 		}
 
 		public void get(final CallBack callBack) {
-			Request request = new Request.Builder().url(url).build();
+			Request.Builder requestBuilder = new Request.Builder();
+			if (!headers.isEmpty()) {
+				for (Map.Entry<String, String> entry : headers.entrySet()) {
+					requestBuilder.addHeader(entry.getKey(), entry.getValue());
+				}
+			}
+			Request request = requestBuilder.url(url).build();
+			
 			HTTP_CLIENT.newCall(request).enqueue(new Callback() {
 				@Override
 				public void onFailure(Call call, IOException e) {
@@ -178,7 +191,14 @@ public class NetUtils {
 				}
 				body = builder.build();
 			}
-			Request request = new Request.Builder().url(url).post(body).build();
+			
+			Request.Builder requestBuilder = new Request.Builder();
+			if (!headers.isEmpty()) {
+				for (Map.Entry<String, String> entry : headers.entrySet()) {
+					requestBuilder.addHeader(entry.getKey(), entry.getValue());
+				}
+			}
+			Request request = requestBuilder.url(url).post(body).build();
 			HTTP_CLIENT.newCall(request).enqueue(new Callback() {
 				@Override
 				public void onFailure(Call call, IOException e) {
