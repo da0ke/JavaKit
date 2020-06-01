@@ -1,0 +1,2 @@
+为什么不用gradle引入 'apache-codec:commons-codec:1.2'？
+zp-mp项目中 'com.github.binarywang:weixin-java-mp:3.4.0'引入了codec:1.1版本，某些方法名不一致，导致微信传图失败
