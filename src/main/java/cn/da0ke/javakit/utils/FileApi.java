@@ -411,6 +411,14 @@ private FileApi(){}
 				try {
 					// 有大图和中图
 					if(hasSmall) {
+						if (!new File(root+middleDir+File.separator+folderName).exists()) {
+							new File(root+middleDir+File.separator+folderName).mkdirs();
+						}
+						
+						if (!new File(root+smallDir+File.separator+folderName).exists()) {
+							new File(root+smallDir+File.separator+folderName).mkdirs();
+						}
+						
 						String middlePath = root+middleDir+File.separator+folderName+File.separator+newFileName;
 						Thumbnails.of(file).size(250, 250).toFile(middlePath);
 						
