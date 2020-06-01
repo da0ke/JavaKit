@@ -383,6 +383,59 @@ private FileApi(){}
 		}
 		
 		/**
+		 * [photo|middlePhoto|smallPhoto]/2019-12-09/xxxxx.jpg
+		 * @return
+		 */
+		public String create4() {
+			String result = null;
+			
+			String newFileName;
+			if(file != null) {
+				if(destFilename == null) {
+					newFileName = generateFileName(fileName);
+				} else {
+					newFileName = destFilename;
+				}
+				
+				String bigDir = "photo";
+				String middleDir = "middlePhoto";
+				String smallDir = "smallPhoto";
+				
+				String folderName = generateFolderNameByDate();
+				String outFilepath = root+bigDir+File.separator+folderName+File.separator+newFileName;
+				
+				if(!new File(root+bigDir+File.separator+folderName).exists()) {
+					new File(root+bigDir+File.separator+folderName).mkdirs();
+				}
+				
+				try {
+					// 有大图和中图
+					if(hasSmall) {
+						String middlePath = root+middleDir+File.separator+folderName+File.separator+newFileName;
+						Thumbnails.of(file).size(250, 250).toFile(middlePath);
+						
+						String smallPath = root+smallDir+File.separator+folderName+File.separator+newFileName;
+						Thumbnails.of(file).size(100, 100).toFile(smallPath);
+					}
+
+					if(watermark != null) { //加水印，则必须进行压缩
+						Thumbnails.of(file).size(bigWidth, bigHeight).watermark(watermark,opacity).toFile(outFilepath);
+					} else if(compress) { //压缩
+						Thumbnails.of(file).size(bigWidth, bigHeight).toFile(outFilepath);
+					} else {
+						FileUtils.copyFile(file, new File(outFilepath));
+					}
+					
+					result = folderName + "/" + newFileName;
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+
+			return result;
+		}
+		
+		/**
 		 * 依据原始文件名后缀,生成新文件名
 		 * 
 		 * @param fileName
